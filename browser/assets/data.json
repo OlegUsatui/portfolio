@@ -1,0 +1,85 @@
+{
+  "identity": {
+    "name": "Oleh Usatyi",
+    "image": "Profile-pic"
+  },
+  "NavBar": {
+    "name": "Oleh Usatyi",
+    "image": "Profile-pic",
+    "links": ["Home", "About", "Portfolio", "Contact"]
+  },
+  "Home": {
+    "introduction": "I am a Skilled Frontend Developer with 3+ years of experience in Angular 2+, Typescript, HTML, CSS. Known for enhancing user engagement by 40% through responsive and user-friendly web designs",
+    "resumeLink": "1plLnPRjzXrrqQzrrrU8mqAU5suiGrSul",
+    "typedElement": ["Oleh Usatyi", "Frontend Developer"]
+  },
+  "About": {
+    "name": "Oleh Usatyi",
+    "image": "Profile-pic",
+    "NavTabs": [
+      {"id": "story", "name": "About", "placement": "top"},
+      {"id": "skill", "name": "Skill", "placement": "bottom"},
+      {"id": "education", "name": "Education", "placement": "top"}
+    ],
+    "about": {
+      "tech-stats": "Frontend Web Developer",
+      "bio": "MyBio",
+      "IDE, Editors & Tools": ["Intellij",  "WebStorm"]
+    },
+    "skills": [
+      [
+        {"skill": "Javascript", "progress": "90"},
+        {"skill": "Typescript", "progress": "90"}
+      ],
+      [
+        {"skill": "HTML/CSS", "progress": "90"},
+        {"skill": "Git/GitHub", "progress": "95"}
+      ]
+    ],
+    "education": [
+      {
+        "animationClass": "Right left",
+        "textAlignment": "right",
+        "degree": "Master of Science in Computer Science",
+        "college": "GoIT NEOVERSITY",
+        "duration": "2023 - 2024",
+        "percentage": ""
+      },
+      {
+        "animationClass": "Left right",
+        "textAlignment": "left",
+        "degree": "Masters degree - science of finance, banking and insurance",
+        "college": "STATE AGRARIAN AND ENGINEERING UNIVESITY IN PODILYA",
+        "duration": "Year of Completion : 2019",
+        "percentage": ""
+      },
+      {
+        "animationClass": "Right left",
+        "textAlignment": "right",
+        "degree": "Masters degree - science of law",
+        "college": "NATIONAL ACADEMY OF INTERNAL AFFAIRS",
+        "duration": "Year of Completion : 2020",
+        "percentage": ""
+      }
+    ]
+  },
+  "Contact": [
+    {"animationClass": "Left", "title": "Location", "icon": "fas fa-street-view", "links": [{"type": "https://maps.google.com/?q=", "title": "Jørpeland, Norvay"}]},
+    {"animationClass": "Up", "title": "Contact Number", "icon": "fas fa-mobile-alt", "links": [{"type": "tel:", "title": "+47-96747190"}]},
+    {"animationClass": "Right", "title": "E-Mail", "icon": "far fa-envelope", "links": [{"type": "mailto:", "title": "oleh.usatyi@gmail.com"}]}
+  ],
+  "Social": [
+    [
+      {"link": "https://https://github.com/OlegUsatui", "class": "fab fa-github", "name": "GitHub", "placement": "left"},
+      {"link": "https://www.linkedin.com/in/oleh-usatyi/", "class": "fab fa-linkedin-in", "name": "LinkedIn", "placement": "top"}
+    ],
+    [
+      {"link": "https://www.instagram.com/usatii.oleg", "class": "fab fa-instagram", "name": "Instagram", "placement": "left"},
+      {"link": "https://wa.me/0661685037", "class": "fab fa-whatsapp", "name": "WhatsApp", "placement": "bottom"}
+    ]
+  ],
+  "Footer": {
+    "dev": {"name": "dev", "link": "", "image": "monkey"},
+    "citation": {"name": "Oleh Usatyi", "image": "Profile-pic", "animationClass": "flipInX", "icon": "fas fa-heart"}
+  }
+}
