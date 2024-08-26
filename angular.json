@@ -26,19 +26,22 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets/data.min.js",
               "src/assets/js",
               "src/assets",
+              "src/assets/css",
+              "src/assets/fonts",
+              "src/assets/images",
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
             "styles": [
+              "src/assets/css/font-awesome.min.css",
+              "src/assets/css/animate.min.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/data.min.js",
               "src/assets/js/typed.min.js",
               "src/assets/js/particles.min.js",
               "src/assets/js/vanilla-tilt.min.js"

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg" id="sticky" [ngClass]="{'nav-sticky': sticky}">
+<nav class="navbar navbar-expand-lg" id="sticky" [ngClass]="{'nav-sticky': sticky}" *ngIf="navbarData">
   <div class="container">
     <h1>
       <a rel="noreferrer" [attr.aria-label]="[navbarData['name']]"
@@ -20,21 +20,21 @@
     <div class="collapse navbar-collapse text-white text-center" id="navbarCollapse"
          [ngClass]="{'show':navbarProfileVisibility}"
          [ngStyle]="{'animation':animation}">
-      <div *ngIf="navbarProfileVisibility" class="pb-1 mb-2">
+      <div *ngIf="navbarProfileVisibility && identityData" class="pb-1 mb-2">
         <img src="assets/images/{{identityData['image']}}.webp"
              alt="Profile"
              class="img-fluid mx-auto rounded-circle mb-2"
              height="100px" width="100px" loading="lazy"><br>
         <h1>
-          <a rel="noreferrer" [attr.aria-label]="[navbarData['name']]"
+          <a *ngIf="navbarData?.name" rel="noreferrer" [attr.aria-label]="[navbarData!.name]"
              class="h5 text-uppercase text-white braces"
              href="/" placement="bottom"> {{ identityData['name'] }} </a>
         </h1>
       </div>
       <ul class="navbar-nav ml-auto" id="mySidenav">
-        <li *ngFor="let navLink of navbarData['links']" class="nav-link pointer"
+        <li *ngFor="let navLink of navbarData?.links" class="nav-link pointer"
             [ngClass]="{'active' : navLink === activeClass}">
-          <a href="/" (click)="updateActiveLink(navLink)" (scroll)="onWindowScroll()" [attr.aria-label]="[navLink]"
+          <a href="/" (click)="updateActiveLink($event, navLink)" [attr.aria-label]="[navLink]"
              placement="bottom">{{ navLink }}</a></li>
       </ul>
       <div *ngIf="navbarProfileVisibility">

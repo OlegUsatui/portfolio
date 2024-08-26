@@ -1,4 +1,4 @@
-<section class="bg-home" id="home">
+<section class="bg-home" id="home" *ngIf="homeData">
   <div class="bg-overlay"></div>
   <div id="particles-js"></div>
   <div class="home-center">
@@ -10,7 +10,8 @@
               <div class="wow fadeInDownBig text-white-50 mb-3 font-weight-normal h5" data-wow-delay="0.5s">Developer
               </div>
               <h2 class="display-3">
-                <div id="typed-strings"><p *ngFor="let typedElement of homeData['typedElement']">{{ typedElement }} </p>
+                <div id="typed-strings">
+                  <p *ngFor="let typedElement of homeData['typedElement']">{{ typedElement }} </p>
                 </div>
                 <span id="element" class="text-white"></span></h2>
               <h3 class="wow fadeInUpBig text-light mx-auto para-desc"

@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { ApiService, Identity, NavBar } from '@app/core';
 
-declare var data : any;
-declare var identity : any;
 
 @Component({
   selector: 'app-header',
@@ -9,8 +9,8 @@ declare var identity : any;
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
-  public navbarData = data['NavBar'];
-  public identityData = identity;
+  public navbarData?: NavBar;
+  public identityData?: Identity;
   public activeClass: String = "Home";
 
   private offset :any = [];
@@ -23,20 +23,35 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   public sticky : boolean = false;
   public animation : string = "";
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              private dataService: ApiService,
+              private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.sticky = event.url !== '/home';
+      }
+    });
+  }
 
   ngOnInit(): void {
-    for (const link of this.navbarData['links']) {
-      this.offsetLink.push(link);
-      this.offset.push(0);
-      this.size++;
-    }
-    window.addEventListener('keydown',(event)=>{
+    this.dataService.getData().subscribe(data => {
+      this.navbarData = data['NavBar'];
+      this.identityData = data['identity'];
+
+      for (const link of this.navbarData['links']) {
+        this.offsetLink.push(link);
+        this.offset.push(0);
+        this.size++;
+      }
+    })
+
+    window.addEventListener('keydown',(event)=> {
       if (event.code === "Escape" && this.navbarProfileVisibility){
         this.removeProfile();
       }
     })
   }
+
   ngAfterViewInit(){
     let navTabs: any = document.querySelectorAll('.nav-link a');
     for (const navTab of navTabs) {
@@ -71,14 +86,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:scroll',['$event'])
   onWindowScroll(){
-    if (this.firstScroll) {
-      this.updateOffsetLink();
-      this.firstScroll = false;
-    }
-    const scroll = scrollY + 10;
-    this.sticky = scroll + 50 >= window.innerHeight;
-    let index: number = this.binarySearch(scroll);
-    this.activeClass = this.offsetLink[index];
+
   }
 
   @HostListener('window:resize', ['$event'])
@@ -90,49 +98,22 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public scrollTo (target : any, duration = 1500, element : any = document.scrollingElement) {
-    if (element.scrollTop === target) return;
-
-    const cosParameter = (element.scrollTop - target) / 2;
-    let scrollCount = 0;
-    let oldTimestamp : any = null;
-
-    const step = (newTimestamp : any)=>{
-      if (oldTimestamp !== null) {
-        scrollCount += Math.PI * (newTimestamp - oldTimestamp) / duration;
-        if (scrollCount >= Math.PI) {
-          element.scrollTop = target;
-          return target;
-        }else{
-          element.scrollTop = cosParameter + target + cosParameter * Math.cos(scrollCount);
-        }
-      }
-      oldTimestamp = newTimestamp;
-      window.requestAnimationFrame(step);
-    }
-    window.requestAnimationFrame(step);
-  }
-
-  updateActiveLink(navLink : String) {
+  updateActiveLink(event: Event, navLink: string) {
+    event.preventDefault();
     if(this.firstClick){
       this.updateOffsetLink();
       this.firstClick = false;
     }
     this.activeClass = navLink;
-    let t = 0;
     if(this.navbarProfileVisibility) {
       this.removeProfile();
-      t = 900;
     }
-    setTimeout(()=>{
-      let element = document.getElementById(navLink.toLowerCase());
-      if(element) {
-        this.scrollTo(element.offsetTop);
-      }
-    },t);
+    this.router.navigate([navLink.toLowerCase()])
   }
 
   public updateOffsetLink(){
+    if (!this.navbarData) return;
+
     for (let index = 0;index < this.size;index++) {
       let element = document.getElementById(this.navbarData['links'][index].toLowerCase());
       if(element) {
