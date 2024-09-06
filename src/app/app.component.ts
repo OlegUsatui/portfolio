@@ -1,15 +1,58 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+  transition,
+  trigger,
+  query,
+  style,
+  group,
+  animate
+} from '@angular/animations';
 import { SwUpdate } from '@angular/service-worker';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 import { SharedModule } from '@shared/shared.module';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterModule, SharedModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  animations: [
+    trigger('routerTransition', [
+      transition('HomePage => AboutPage, AboutPage => PortfolioPage, PortfolioPage => ContactPage, ContactPage => RecruiterPage', [
+        // Элементы покидают экран
+        query(':leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
+        query(':enter', style({ position: 'fixed', width: '100%', transform: 'translateX(100%)' }), { optional: true }),
+
+        // Анимация для обоих элементов (enter/leave)
+        group([
+          query(':leave', [
+            animate('0.5s ease', style({ transform: 'translateX(-100%)' }))
+          ], { optional: true }),
+          query(':enter', [
+            animate('0.5s ease', style({ transform: 'translateX(0%)' }))
+          ], { optional: true })
+        ])
+      ]),
+      transition('AboutPage => HomePage, PortfolioPage => AboutPage, ContactPage => PortfolioPage, RecruiterPage => ContactPage, * => *', [
+        // Элементы покидают экран
+        query(':leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
+        query(':enter', style({ position: 'fixed', width: '100%', transform: 'translateX(-100%)' }), { optional: true }),
+
+        // Анимация для обоих элементов (enter/leave)
+        group([
+          query(':leave', [
+            animate('0.5s ease', style({ transform: 'translateX(100%)' }))
+          ], { optional: true }),
+          query(':enter', [
+            animate('0.5s ease', style({ transform: 'translateX(0%)' }))
+          ], { optional: true })
+        ])
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit, AfterViewInit {
   constructor(private swUpdate: SwUpdate) {
@@ -46,5 +89,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         loader.remove();
       }, 800);
     }, 1000);
+  }
+
+  triggerAnimation(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.['animation'];
   }
 }

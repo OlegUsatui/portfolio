@@ -29,11 +29,16 @@
     "skills": [
       [
         {"skill": "Javascript", "progress": "90"},
-        {"skill": "Typescript", "progress": "90"}
+        {"skill": "Typescript", "progress": "90"},
+        {"skill": "Angular", "progress": "90"},
+        {"skill": "NgRx", "progress": "90"},
+        {"skill": "Jasmine, Karma, Cypress", "progress": "50"}
       ],
       [
         {"skill": "HTML/CSS", "progress": "90"},
-        {"skill": "Git/GitHub", "progress": "95"}
+        {"skill": "Gulp", "progress": "90"},
+        {"skill": "Git/GitHub", "progress": "95"},
+        {"skill": "Bitbucket", "progress": "95"}
       ]
     ],
     "education": [

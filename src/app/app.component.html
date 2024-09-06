@@ -1,2 +1,5 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
+<div [@routerTransition]="triggerAnimation(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>
+
