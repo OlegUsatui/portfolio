@@ -11,18 +11,18 @@
               </div>
               <h2 class="display-3">
                 <div id="typed-strings">
-                  <p *ngFor="let typedElement of homeData['typedElement']">{{ typedElement }} </p>
+                  <p *ngFor="let typedElement of homeData.typedElement">{{ typedElement }} </p>
                 </div>
                 <span id="element" class="text-white"></span></h2>
               <h3 class="wow fadeInUpBig text-light mx-auto para-desc"
-                  data-wow-delay="0.5s">{{ homeData['introduction'] }}</h3></div>
+                  data-wow-delay="0.5s">{{ homeData.introduction }}</h3></div>
           </div>
           <div class="mt-4 pt-2">
             <div class="resume-button" placement="bottom">
               <a rel="noreferrer"
                  aria-label="Download Resume (opens in a new tab)"
                  target="_blank"
-                 href="https://drive.google.com/file/d/{{homeData['resumeLink']}}/view?usp=sharing">
+                 href="https://drive.google.com/file/d/{{homeData.resumeLink}}/view?usp=sharing">
                 Download Resume <i class="fas fa-download ml-2"></i></a></div>
           </div>
         </div>
